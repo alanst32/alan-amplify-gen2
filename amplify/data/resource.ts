@@ -12,6 +12,22 @@ const schema = a.schema({
       content: a.string(),
     })
     .authorization((allow) => [allow.owner()]),
+  Address: a.customType({
+    address: a.string(),
+    state: a.string(),
+    country: a.string(),
+    postcode: a.string(),
+  }),
+  PrivacySetting: a.enum(["PRIVATE", "FRIENDS_ONLY", "PUBLIC"]),
+  Event: a
+    .model({
+      address: a.ref("Address"),
+      name: a.string(),
+      category: a.string(),
+      datetime: a.string(),
+      privacySetting: a.ref("PrivacySetting"),
+    })
+    .authorization((allow) => [allow.authenticated()]),
   // Isolate the data as "onwer-based-authorizatoin" per user basis
 });
 
