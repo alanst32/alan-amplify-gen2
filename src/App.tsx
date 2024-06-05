@@ -1,6 +1,9 @@
-import { Authenticator } from "@aws-amplify/ui-react";
-import "@aws-amplify/ui-react/styles.css";
-import EventLanding from "./pages/EventLanding";
+import { Authenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
+import EventLanding from './pages/EventLanding';
+import Header from './custom-components/header';
+import Footer from './custom-components/footer';
+import { signOut } from 'aws-amplify/auth';
 
 // const client = generateClient<Schema>();
 
@@ -21,13 +24,17 @@ function App() {
   //   client.models.Todo.delete({ id });
   // }
 
+  async function handleSignOut() {
+    await signOut();
+  }
+
   return (
     <Authenticator>
-      {({ signOut, user }) => (
-        <main>
-          <h1>{user?.signInDetails?.loginId} todos</h1>
-          <EventLanding></EventLanding>
-          {/* <button onClick={createTodo}>+ new</button>
+      <main>
+        <Header></Header>
+        <EventLanding></EventLanding>
+        <Footer signOut={handleSignOut}></Footer>
+        {/* <button onClick={createTodo}>+ new</button>
           <ul>
             {todos.map((todo) => (
               <li key={todo.id} onClick={() => deleteTodo(todo.id)}>
@@ -35,18 +42,7 @@ function App() {
               </li>
             ))}
           </ul> */}
-          <div>
-            🥳 App successfully hosted.
-            <br />
-            <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">
-              Review next step of this tutorial.
-            </a>
-          </div>
-          <div>
-            <button onClick={signOut}>Sign out</button>
-          </div>
-        </main>
-      )}
+      </main>
     </Authenticator>
   );
 }

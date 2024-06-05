@@ -1,4 +1,4 @@
-import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
+import { type ClientSchema, a, defineData } from '@aws-amplify/backend';
 
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
@@ -7,27 +7,22 @@ specifies that any user authenticated via an API key can "create", "read",
 "update", and "delete" any "Todo" records.
 =========================================================================*/
 const schema = a.schema({
-  Todo: a
-    .model({
-      content: a.string(),
-    })
-    .authorization((allow) => [allow.owner()]),
   Address: a.customType({
     address: a.string(),
     state: a.string(),
     country: a.string(),
-    postcode: a.string(),
+    postcode: a.string()
   }),
-  PrivacySetting: a.enum(["PRIVATE", "FRIENDS_ONLY", "PUBLIC"]),
+  PrivacySetting: a.enum(['PRIVATE', 'FRIENDS_ONLY', 'PUBLIC']),
   Event: a
     .model({
-      address: a.ref("Address"),
+      address: a.ref('Address'),
       name: a.string(),
       category: a.string(),
       datetime: a.string(),
-      privacySetting: a.ref("PrivacySetting"),
+      privacySetting: a.ref('PrivacySetting')
     })
-    .authorization((allow) => [allow.authenticated()]),
+    .authorization(allow => [allow.authenticated()])
   // Isolate the data as "onwer-based-authorizatoin" per user basis
 });
 
@@ -38,12 +33,12 @@ export const data = defineData({
   authorizationModes: {
     // This tells the data client in your app (generateClient())
     // to sign API requests with the user authentication token.
-    defaultAuthorizationMode: "userPool",
+    defaultAuthorizationMode: 'userPool',
     // API Key is used for a.allow.public() rules
     apiKeyAuthorizationMode: {
-      expiresInDays: 30,
-    },
-  },
+      expiresInDays: 30
+    }
+  }
 });
 
 /*== STEP 2 ===============================================================
