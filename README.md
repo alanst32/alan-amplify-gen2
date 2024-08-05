@@ -1,3 +1,11 @@
+# Create Full-Stack applications with Amplify Gen 2
+This repository is part of a blog post which explain how to create easy full stack applications in Typescript with Amplify Gen 2. 
+The post you can find it here: https://cevo.com.au/post/create-full-stack-applications-with-amplify-gen-2/
+
+In this tutorial, we will build a React-Typescript-Vite full stack application integrated with Build UI form.  
+
+![alt text](src/assets/Amplify-gen-2-case.webp)
+
 ## AWS Amplify React+Vite Starter Template
 
 This repository provides a starter template for creating applications using React+Vite and AWS Amplify, emphasizing easy setup for authentication, API, and database capabilities.
